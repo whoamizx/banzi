@@ -6,7 +6,7 @@ using namespace std;
 const int N = 1.1e7 + 10;
 int n;
 int p[2 * N];
-//p记录每个位置的回文串长度
+// p记录每个位置的回文串长度
 char s[N];
 char t[2 * N];
 
@@ -46,6 +46,7 @@ void manacher()
     {
         ans = max(ans, p[i]);
     }
+    // 去掉后的长度
     printf("%d\n", ans - 1); // 去掉符号$
 }
 int main()
