@@ -1,0 +1,65 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(gdb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            //需要调试的可执行文件 
+            "program": "C:\\Windows\\System32\\cmd.exe",
+            // "args": [], //调试传递参数
+            // "args": [
+            //     "/c",
+            //     "${fileDirname}/${fileBasenameNoExtension}.exe",
+            //     "&",
+            //     "pause"
+            // ],
+            "args": [
+                "/c",
+                "g++.exe",
+                "${fileDirname}/${fileBasename}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}.exe",
+                "&&",
+                "${fileDirname}/${fileBasenameNoExtension}.exe",
+                "&",
+                "pause"
+            ],
+            //交叉编译与静态编译
+            // "args": [
+            //     "/c",
+            //     "g++.exe",
+            //     "-static",
+            //     "${fileDirname}/${fileBasename}",
+            //     "-o",
+            //     "${fileDirname}/${fileBasenameNoExtension}.exe",
+            //     "&&",
+            //     "${fileDirname}/${fileBasenameNoExtension}.exe",
+            //     "&",
+            //     "pause"
+            // ],//还要将mingw32的bin加到环境变量
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "gdb",
+            //gdb location
+            "miDebuggerPath": "C:\\Users\\54472\\Downloads\\mingw\\mingw64\\bin\\gdb.exe",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
+}
