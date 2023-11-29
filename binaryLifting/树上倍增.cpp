@@ -23,7 +23,7 @@ inline void dfs(int x)
 }
 int main()
 {
-    scanf("%d%d", &n, &q);
+    scanf("%d%d", &n, &q); // n是节点数
     for (int i = 1; i <= n; i++)
     {
         scanf("%d", &a[i]);
