@@ -1,3 +1,4 @@
+// O(mlog(n))
 #include <bits/stdc++.h>
 using namespace std;
 const int N = 2e5 + 10;
@@ -12,7 +13,7 @@ struct Node
 };
 set<pair<int, int>> q;
 vector<Node> edge[N + 1];
-int n, m, dist[N + 1];//n和m的取值需要注意
+int n, m, dist[N + 1]; // n和m的取值需要注意
 int Dijkstra(int s, int t)
 {
     memset(dist, 127, sizeof(dist)); // 大于1<<30
