@@ -56,6 +56,6 @@ int main()
     for (int i = 1; i <= m; i++)
     {
         printf("%d ", nxt[i]);
-    }
+    }    
     return 0;
 }

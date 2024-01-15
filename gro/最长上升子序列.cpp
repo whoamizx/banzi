@@ -6,7 +6,11 @@
 #include <string>
 using namespace std;
 const int N = 1e5 + 10;
-int a[N];
+struct Node
+{
+    int id;
+    int val;
+} node[N];
 int s[N];
 int main()
 {
@@ -16,21 +20,21 @@ int main()
     cin >> n;
     for (int i = 1; i <= n; i++)
     {
-        scanf("%d", &a[i]);
+        scanf("%d", &node[i].val);
+        node[i].id = i;
     }
-    s[++tot] = a[1];
+    s[++tot] = node[1].val;
     for (int i = 2; i <= n; i++)
     {
-        if (a[i] > s[tot])
+        if (node[i].val > s[tot])
         {
-            s[++tot] = a[i];
+            s[++tot] = node[i].val;
         }
         else
         {
             tmp = lower_bound(s + 1, s + tot + 1, a[i]) - s;
-            s[tmp] = a[i];
+            s[tmp] = node[i].val;
         }
     }
-    printf("%d\n", tot);
     return 0;
 }
