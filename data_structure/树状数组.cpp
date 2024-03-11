@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define int long long
+//单点修改
+//前缀和
 const int N = 2e5 + 10;
 int a[N], c[N];
 int n, q;
