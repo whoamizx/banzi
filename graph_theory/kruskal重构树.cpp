@@ -9,7 +9,7 @@ struct Node
     int x, y, v;
 } a[M];
 
-int n, m, q, tot, fa[N], nodeweigh[N], dist[N], f[N][21], v[N][21];
+int n, m, q, tot, fa[N], nodeweigh[N], dist[N], f[N][21];
 vector<int> edge[N];
 vector<int> node[N];
 
@@ -23,14 +23,17 @@ int findset(int i)
 {
     if (i == fa[i])
         return i;
+    // 记得更新fa[i],让下次查找更快
     return fa[i] = findset(fa[i]);
 }
 
 void kruskal_rebuild_tree()
 {
-    tot = n;
+    tot = n; // 节点数目
+
     for (int i = 1; i <= 2 * n; i++) // 点数增加
         fa[i] = i;
+
     sort(a + 1, a + 1 + m, cmp);
     int cnt = n;
     for (int i = 1; i <= m; i++)
@@ -39,20 +42,23 @@ void kruskal_rebuild_tree()
         int y = findset(a[i].y);
         if (x != y)
         {
-            fa[x] = ++tot;
+            tot++;
+            fa[x] = tot;
             fa[y] = tot;
             node[tot].push_back(x);
             node[tot].push_back(y);
             nodeweigh[tot] = a[i].v;
             --cnt;
         }
+        // 稍微降低一点复杂度,因为n次建树之后,所有点肯定用完了
+        // 而边的数目多,所以后面的边直接break
         if (cnt == 1)
             break;
     }
     n = tot; ////更新n
 }
 
-inline void dfs(int x) // 双向边的话要判from
+inline void dfs(int x) // 双向边的话要判from //?
 {
     for (auto y : node[x]) //////
     {
@@ -72,25 +78,30 @@ int main()
     {
         scanf("%d%d%d", &a[i].x, &a[i].y, &a[i].v);
     }
+
     kruskal_rebuild_tree();
+
     memset(dist, 0, sizeof(dist));
     // 可能有多棵树,形成森林
     bool bb[n];
     bb[n] = true;
-    // n一定是一个根节点
+    // n一定是一个根节点,因为n已经更新了,变成重构树的最上面的根节点
     dist[n] = 1;
     dfs(n);
+
     for (int i = 1; i <= n; i++)
     {
         int father = findset(i);
+        // 看这片森林的这棵树有没有访问过
         if (!bb[father])
         {
-            dist[father] = 1; // 从根节点开始
+            // 从根节点开始,更新这颗树的深度
+            dist[father] = 1;
             dfs(father);
-            bb[father] = true;
+            bb[father] = true; // 只有把father设成true就行,dfs就不要麻烦了
         }
     }
-    memset(v, 127, sizeof(v));
+
     for (int i = 1; i <= 20; i++)
     {
         for (int j = 1; j <= n; j++)
