@@ -1,9 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
-typedef long long ll;
-ll fastpow(ll a, ll n, ll mod)
+#define int long long
+// 能mod的地方就多mod几次
+int fastpow(int a, int n, int mod)
 {
-    ll ans = 1;
+    int ans = 1;
+    // 先mod防止爆
     a %= mod;
     while (n)
     {
@@ -11,14 +13,15 @@ ll fastpow(ll a, ll n, ll mod)
         {
             ans = (ans * a) % mod;
         }
+        // 放到外面,因为每次右移都要加倍
         a = (a * a) % mod;
         n >>= 1;
     }
     return ans;
 }
-int main()
+signed main()
 {
-    ll a, b, p;
+    int a, b, p;
     cin >> a >> b >> p;
     printf("%lld^%lld mod %lld=%lld\n", a, b, p, fastpow(a, b, p));
     return 0;
