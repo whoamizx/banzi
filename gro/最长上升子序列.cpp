@@ -1,40 +1,31 @@
-// 最长上升子序列
-// O(nlogn)
-#include <iostream>
-#include <algorithm>
-#include <cstring>
-#include <string>
+#include <bits/stdc++.h>
 using namespace std;
+#define int long long
 const int N = 1e5 + 10;
-struct Node
-{
-    int id;
-    int val;
-} node[N];
+int a[N];
 int s[N];
-int main()
+signed main()
 {
     int n;
-    int tot = 0;
-    int tmp;
     cin >> n;
     for (int i = 1; i <= n; i++)
     {
-        scanf("%d", &node[i].val);
-        node[i].id = i;
+        scanf("%lld", &a[i]);
     }
-    s[++tot] = node[1].val;
+    int tot = 0;
+    s[++tot] = a[1];
     for (int i = 2; i <= n; i++)
     {
-        if (node[i].val > s[tot])
+        if (a[i] > s[tot])
         {
-            s[++tot] = node[i].val;
+            s[++tot] = a[i];
         }
         else
         {
-            tmp = lower_bound(s + 1, s + tot + 1, a[i]) - s;
-            s[tmp] = node[i].val;
+            int id = lower_bound(s + 1, s + 1 + tot, a[i]) - s;
+            s[id] = a[i];
         }
     }
+    printf("%lld\n", tot);
     return 0;
 }
