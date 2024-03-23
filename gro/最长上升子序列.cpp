@@ -16,7 +16,7 @@ signed main()
     s[++tot] = a[1];
     for (int i = 2; i <= n; i++)
     {
-        if (a[i] > s[tot])
+        if (a[i] > s[tot]) // 如果是>=底下要给成upper_bound
         {
             s[++tot] = a[i];
         }
