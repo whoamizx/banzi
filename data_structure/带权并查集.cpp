@@ -17,8 +17,12 @@ int find(int x)
         return x;
     }
     // 带权并查集路径压缩
+    // 先把现在父亲存起来
     int t = fa[x];
+    // 更新父亲权值
+    // 但是父亲变成根了
     fa[x] = find(fa[x]);
+    // 加上之前存的现在父亲的权值
     val[x] += val[t];
     return fa[x];
 }
