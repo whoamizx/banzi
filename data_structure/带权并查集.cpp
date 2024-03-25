@@ -38,6 +38,7 @@ signed main()
     {
         int l, r, s;
         scanf("%lld%lld%lld", &l, &r, &s);
+        // sum[r]-sum[l-1]=s
         l--;
         int fx = find(l);
         int fy = find(r);

@@ -1,7 +1,8 @@
 // 可以less greater 重载结构体运算符
 #include <bits/stdc++.h>
 using namespace std;
-bool cmp(const pair<int, int> &p1, const pair<int, int> &p2) // 要用常数，不然编译错误
+// 要用常数，不然编译错误
+bool cmp(const pair<int, int> &p1, const pair<int, int> &p2)
 {
     return p1.second < p2.second;
 }
@@ -13,13 +14,13 @@ int main(void)
     mp[3] = 2;
     mp[4] = 1;
     vector<pair<int, int>> arr;
-    for (map<int, int>::iterator it = mp.begin(); it != mp.end(); ++it)
+    for (auto it = mp.begin(); it != mp.end(); ++it)
     {
         cout << it->first << '\t' << it->second << endl;
-        arr.push_back(make_pair(it->first, it->second));
+        arr.push_back({it->first, it->second});
     }
     sort(arr.begin(), arr.end(), cmp);
-    for (vector<pair<int, int>>::iterator it = arr.begin(); it != arr.end(); ++it)
+    for (auto it = arr.begin(); it != arr.end(); ++it)
     {
         cout << it->first << '\t' << it->second << endl;
     }
