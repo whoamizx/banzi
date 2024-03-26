@@ -2,6 +2,7 @@
 using namespace std;
 #define int long long
 const int N = 1e5 + 10;
+// 不好理解的启发式合并
 // 经常和树上什么颜色问题有关系
 int color[N];
 vector<int> edges[N];
@@ -32,10 +33,13 @@ void dfs1(int x, int father)
 
 void count(int u, int f, int val)
 {
+    // 用自己更新
     cnt[color[u]] += val;
 
+    // 更新答案
     if ((cnt[color[u]] > maxc))
     {
+        // 处理完后,maxc和sum实际上相当于保存了轻儿子处理后的信息
         maxc = cnt[color[u]];
         sum = color[u];
     }
@@ -43,7 +47,7 @@ void count(int u, int f, int val)
     {
         sum += color[u];
     }
-
+    // 用轻儿子更新
     for (auto y : edges[u])
     {
         // 这里就只略去之前在处理节点的重儿子,所以就只略去一个重儿子
@@ -73,15 +77,14 @@ void dfs(int u, int f, bool keep)
         // 把本节点的重儿子是谁记录下来
         flag = son[u];
     }
-    // 本题特定的算答案函数
     count(u, f, 1);
     // 这个轻儿子节点处理完了,他的自己和他的重儿子的信息也要全部删掉,
     // 所以flag=0,防止没有删去这个轻儿子节点的重儿子信息
     flag = 0;
     ans[u] = sum;
+    // 是否保留本节点信息
     if (!keep)
     {
-        // 不保留轻儿子信息,删去轻儿子信息
         count(u, f, -1);
         sum = maxc = 0;
     }
