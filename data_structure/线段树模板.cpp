@@ -23,16 +23,19 @@ void push_up(int p)
 void build(int p, int pl, int pr)
 {
     // 懒标记初始化为0
+    // 懒标记更新放到最前面,因为所有的都要更新
     tag[p] = 0;
 
     if (pl == pr)
     {
         // 或者tree[p]=a[pr]也行
         tree[p] = a[pl];
+        // 记得return
         return;
     }
 
     int mid = (pl + pr) / 2;
+    // ls和rs
     build(ls(p), pl, mid);
     build(rs(p), mid + 1, pr);
 
@@ -50,6 +53,7 @@ void push_down(int p, int pl, int pr)
     if (tag[p])
     {
         int mid = (pl + pr) / 2;
+        // p已经在之前更新过了,这里不用再更新
         addtag(ls(p), pl, mid, tag[p]);
         addtag(rs(p), mid + 1, pr, tag[p]);
         tag[p] = 0;
@@ -60,7 +64,7 @@ void update(int L, int R, int p, int pl, int pr, int d)
     // 完全覆盖则更新懒标签
     if (L <= pl && pr <= R)
     {
-        addtag(p, pl, pr, d);
+        addtag(p, pl, pr, d); // 调用add
         return;
     }
 
@@ -90,6 +94,7 @@ int query(int L, int R, int p, int pl, int pr)
     push_down(p, pl, pr);
     int res = 0;
     int mid = (pl + pr) / 2;
+    // 这里是L和R
     if (L <= mid)
     {
         res += query(L, R, ls(p), pl, mid);
