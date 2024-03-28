@@ -15,6 +15,7 @@ int rs(int p)
 {
     return p * 2 + 1;
 }
+
 void push_up(int p)
 {
     tree[p] = tree[ls(p)] + tree[rs(p)];
@@ -23,17 +24,22 @@ void build(int p, int pl, int pr)
 {
     // 懒标记初始化为0
     tag[p] = 0;
+
     if (pl == pr)
     {
         // 或者tree[p]=a[pr]也行
         tree[p] = a[pl];
         return;
     }
+
     int mid = (pl + pr) / 2;
     build(ls(p), pl, mid);
     build(rs(p), mid + 1, pr);
+
+    // 儿子更新过了,用儿子更新自己,向上传递
     push_up(p);
 }
+
 void addtag(int p, int pl, int pr, int d)
 {
     tag[p] += d;
@@ -51,13 +57,16 @@ void push_down(int p, int pl, int pr)
 }
 void update(int L, int R, int p, int pl, int pr, int d)
 {
+    // 完全覆盖则更新懒标签
     if (L <= pl && pr <= R)
     {
         addtag(p, pl, pr, d);
         return;
     }
+
     // 不能覆盖就要把tag传给子树
     push_down(p, pl, pr);
+
     int mid = (pl + pr) / 2;
     if (L <= mid)
     {
@@ -67,6 +76,7 @@ void update(int L, int R, int p, int pl, int pr, int d)
     {
         update(L, R, rs(p), mid + 1, pr, d);
     }
+
     // 儿子更新过了,传递上来
     push_up(p);
 }
