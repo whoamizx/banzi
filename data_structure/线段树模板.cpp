@@ -64,7 +64,7 @@ void update(int L, int R, int p, int pl, int pr, int d)
     // 完全覆盖则更新懒标签
     if (L <= pl && pr <= R)
     {
-        addtag(p, pl, pr, d); // 调用add
+        addtag(p, pl, pr, d); // 调用addtag
         return;
     }
 
