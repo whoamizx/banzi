@@ -8,6 +8,9 @@ const int N = 20;
 double a[N];
 double b[N];
 double dist[N][N];
+// dp数组含义
+// 第一维是包含的点,二进制1表示包含,0表示不包含
+// 第二维表示最后加入的点
 double dp[1 << N][N];
 
 signed main()
@@ -21,6 +24,7 @@ signed main()
 
     a[0] = 0;
     b[0] = 0;
+    // 预处理距离
     for (int i = 0; i <= n; i++)
     {
         for (int j = i + 1; j <= n; j++)
@@ -30,6 +34,7 @@ signed main()
             dist[j][i] = temp;
         }
     }
+    // dp数组初始化
     for (int i = 0; i < (1 << n + 1); i++)
     {
         for (int j = 0; j <= n; j++)
@@ -39,27 +44,34 @@ signed main()
     }
 
     dp[1][0] = 0;
+    // 遍历顺序
     for (int S = 1; S < (1 << (n + 1)); S++)
     {
         for (int j = 0; j <= n; j++)
         {
+            // 有没有j能用来去掉
             if ((S >> j) & 1)
             {
                 for (int k = 0; k <= n; k++)
                 {
+                    // 去掉j,剩下的中找一个k
+                    // for出所有这样的k的最小值
                     if (S ^ (1 << j) >> k & 1)
                     {
+                        // 转移方程
+                        // 包含S中的点,
                         dp[S][j] = min(dp[S][j], dp[S ^ (1 << j)][k] + dist[k][j]);
                     }
                 }
             }
         }
     }
+
     double ans = 1e9 + 10;
     for (int i = 1; i <= n; i++)
     {
         ans = min(ans, dp[(1 << (n + 1)) - 1][i]);
     }
-    printf("%.2lf", ans);
+    printf("%.2lf\n", ans);
     return 0;
 }
