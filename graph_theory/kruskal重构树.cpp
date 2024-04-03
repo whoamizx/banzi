@@ -102,7 +102,7 @@ int main()
         }
     }
 
-    for (int i = 1; i <= 20; i++)
+    for (int i = 1; i <= 20; i++) // 先遍历完所有节点的一2^i父亲,再下一层
     {
         for (int j = 1; j <= n; j++)
         {
@@ -141,7 +141,7 @@ int main()
                     y = f[y][i];
                 }
             }
-            x = f[x][0];
+            x = f[x][0]; // 放括号里面
         }
         printf("%d\n", nodeweigh[x]);
     }
