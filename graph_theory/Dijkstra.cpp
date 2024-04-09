@@ -1,4 +1,4 @@
-// O(mlog(n))
+// O(mlog(n)+nklog(n))//k为每个点的平均邻居数
 #include <bits/stdc++.h>
 using namespace std;
 const int N = 2e5 + 10;
