@@ -9,6 +9,7 @@ const int N = 1e6 + 10;
 int n, m;
 
 int nxt[N];
+// 位置i为终点匹配的长度
 int f[N + 1];
 char s[N], p[N];
 void kmp()
@@ -60,7 +61,6 @@ int main()
 
     for (int i = 1; i <= n; i++)
     {
-        //
         if (f[i] == m)
         {
             printf("%d\n", i - m + 1);
