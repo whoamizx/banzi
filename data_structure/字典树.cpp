@@ -1,13 +1,12 @@
 // 字符串是否出现过
 #include <bits/stdc++.h>
 using namespace std;
-const int N = 1e5 + 10; // 字符串总长度最大值
+// 字符串总长度最大值
+const int N = 1e5 + 10;
 // 多组输入记得清零
-
 int cnt = 0;
-int nxt[N][27]; // 默认小写字母
+int nxt[N][27]; // 默认小写字母//静态
 bool isend[N];
-
 void insert(char s[], int len)
 {
     int now = 0;

@@ -1,4 +1,4 @@
-//最小字典序拓扑排序
+// 最小字典序拓扑排序
 #include <bits/stdc++.h>
 using namespace std;
 vector<int> edge[110];
@@ -40,7 +40,7 @@ inline void Toposort()
 }
 int main()
 {
-    while (scanf("%d%d", &n, &m) == 2 && n)//此处表示n和m不同时为0
+    while (scanf("%d%d", &n, &m) == 2 && n) // 此处表示n和m不同时为0
     {
         memset(d, 0, sizeof(d));
         for (int i = 0; i <= n; i++) // 注意多个输入清空

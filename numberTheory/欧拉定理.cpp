@@ -7,12 +7,18 @@ int eular(int n)
     {
         if (n % i == 0)
         {
-            ans = ans / i * (i - 1);
+            // 欧拉函数公式
+            ans = (ans / i) * (i - 1);
+            // 去掉这个质因数
             while (n % i == 0)
                 n /= i;
         }
     }
+    // 说明n就是质数
     if (n > 1)
-        ans = ans / n * (n - 1);
+    {
+        // ans=n-1;
+        ans = (ans / n) * (n - 1);
+    }
     return ans;
 }

@@ -7,6 +7,7 @@ using namespace std;
 // 第一行包含 3 个整数N、M和Q。分别代表数组长度、已知的部分和数量 和询问的部分和数量
 // 接下来 M 行，每行包含3个整数li,ri,Si。
 // 接下来Q行，每行包含2个整数l和r，代表一个小蓝想知道的部分和
+// https://www.luogu.com.cn/problem/P8779
 const int N = 1e5 + 10;
 int fa[N];
 int val[N];
