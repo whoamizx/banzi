@@ -16,6 +16,7 @@ signed main()
     }
     // 如果f[i][i]初始化成0,就是代表i到i距离定义为0
     // 如果初始化成无穷大,最后会得到走一圈回到i的距离(无向边就是出门就回来)
+    // 如果最后f[i][i]<0,则存在负环
     for (int i = 1; i <= n; i++)
     {
         f[i][i] = 0;
@@ -38,7 +39,7 @@ signed main()
     for (int k = 1; k <= n; k++)
         for (int i = 1; i <= n; i++)
             for (int j = 1; j <= n; j++)
-                // 如果i到k和j到k都有连边
+                // 如果i到k和j到k都有连边//不要忘记写
                 if (f[i][k] < LLONG_MAX && f[k][j] < LLONG_MAX)
                     // 滚动数组优化,只用到上一层
                     f[i][j] = min(f[i][j], f[i][k] + f[k][j]);
