@@ -7,18 +7,31 @@ struct Node
     Node(int _y, int _idx) : y(_y), idx(_idx) {}
 };
 vector<Node> edge[N];
-int n, m, cnt = 1, l, f[N], c[N], d[N];
+int n, m;
+int cnt = 1;
+// 记录走了几条边了
+int l;
+int f[N];
+// 记录路径
+int c[N];
+// 度数
+int d[N];
+// 记录走过没有
 bool b[N];
 inline void dfs(int x)
 {
     while (f[x] < d[x])
     {
+        // 从上次走过的位置开始
         int y = edge[x][f[x]].y;
         int idx = edge[x][f[x]].idx;
+        // 走过就不走了
         if (!b[idx])
         {
             ++f[x];
-            b[idx] = b[idx ^ 1] = true; // 每条双向边走一次
+            // 每条双向边走一次
+            //^可以得到边的对应另一条
+            b[idx] = b[idx ^ 1] = true;
             dfs(y);
             c[++l] = y;
         }
@@ -30,19 +43,25 @@ inline void dfs(int x)
 }
 inline void Euler()
 {
-    int x = 0, y = 0;
+    // 起点
+    int x = 0;
+    // 有几个奇度顶点
+    int y = 0;
     for (int i = 1; i <= n; i++)
     {
         if (d[i] & 1)
         {
-            ++y, x = i;
+            ++y;
+            x = i;
         }
     }
+    // 没有奇度顶点或者只有两个,否则NO
     if (y && y != 2)
     {
         printf("No\n");
         return;
     }
+    // 如果没有起点,随便找一个有度数的点
     if (!x)
     {
         for (int i = 1; i <= n; i++)
@@ -50,20 +69,25 @@ inline void Euler()
             if (d[i])
             {
                 x = i;
+                break;
             }
         }
     }
+
     memset(b, false, sizeof(b));
     memset(f, 0, sizeof(f));
     l = 0;
     dfs(x);
+
     c[++l] = x; // 从x开始
+    // 边没走完
     if (l != m + 1)
     {
         printf("No\n");
         return;
     }
-    for (int i = l; i >= 1; i--) // 输出边
+    // 逆序输出边
+    for (int i = l; i >= 1; i--)
     {
         printf("%d\n", c[i]);
     }
