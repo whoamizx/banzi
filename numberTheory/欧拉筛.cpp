@@ -1,21 +1,18 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define int long long
-const int N = 1e7 + 10;
 const int M = 1e8 + 10;
-// 从0开始
-int prime[N];
+vector<int> prime;
 bool vis[M];
+// 每个合数只被最小的质因数筛一次
 int euler_sieve(int n)
 {
     int cnt = 0;
-    memset(vis, 0, sizeof(vis));
-    memset(prime, 0, sizeof(prime));
     for (int i = 2; i <= n; i++)
     {
         if (!vis[i])
         {
-            prime[cnt] = i;
+            prime.push_back(i);
             cnt++;
         }
         for (int j = 0; j < cnt; j++)
@@ -24,7 +21,9 @@ int euler_sieve(int n)
             {
                 break;
             }
+            // 每个prime的i倍都被筛,i递增的
             vis[i * prime[j]] = 1;
+            // 防止重复筛
             if (i % prime[j] == 0)
             {
                 break;
