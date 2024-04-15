@@ -12,6 +12,7 @@ inline int gauss()
     {
         for (int j = l; j <= n; j++)
         {
+            // 0不能作为第一列,所以找一个非0的上来
             if (a[j][i])
             {
                 for (int k = i; k <= n; k++)
@@ -41,6 +42,7 @@ inline int gauss()
         }
         l++;
     }
+    // 有参数没搞完
     for (int i = l; i <= n; i++)
     {
         if (fabs(b[i]) > eps)

@@ -28,6 +28,7 @@ int eular(int n)
             n /= i;
             ans = ans / i * (i - 1);
             while (n % i == 0)
+                n /= i;
         }
     }
     if (n > 1)
