@@ -6,11 +6,12 @@ int n, m, l[110], d[110];
 priority_queue<int, vector<int>, greater<int>> q; // 改成小根堆
 inline void Toposort()
 {
+    // 初始化
     while (!q.empty())
     {
         q.pop();
     }
-
+    // 没有入度的点加入优队
     for (int i = 1; i <= n; i++)
     {
         if (!d[i])
@@ -26,12 +27,19 @@ inline void Toposort()
         l[++tot] = x;
         for (auto y : edge[x])
         {
+            // 入度减为0
             if (--d[y] == 0)
             {
                 q.push(y);
             }
         }
     }
+    // 发现剩了顶点
+    if (tot != n)
+    {
+        printf("NO WAY\n");
+    }
+    // 输出路径
     for (int i = 1; i <= n; i++)
     {
         printf("%d ", l[i]);
