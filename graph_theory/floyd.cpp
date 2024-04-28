@@ -3,6 +3,8 @@ using namespace std;
 #define int long long
 int n, m;
 int f[310][310];
+//?未验证路径记录
+// int path[310][310]//path[i][j] j的直接前驱
 signed main()
 {
     cin >> n >> m;
@@ -34,6 +36,9 @@ signed main()
         // 无向边
         f[u][v] = w;
         f[v][u] = w;
+
+        // path[u][v] = u;
+        // path[v][u]=v;
     }
     // k是最外层循环
     for (int k = 1; k <= n; k++)
@@ -41,8 +46,12 @@ signed main()
             for (int j = 1; j <= n; j++)
                 // 如果i到k和j到k都有连边//不要忘记写
                 if (f[i][k] < LLONG_MAX && f[k][j] < LLONG_MAX)
+                {
                     // 滚动数组优化,只用到上一层
                     f[i][j] = min(f[i][j], f[i][k] + f[k][j]);
+                    // path[i][j]=path[k][j]
+                }
+
     for (int i = 1; i <= n; i++)
     {
         for (int j = 1; j <= n; j++)
