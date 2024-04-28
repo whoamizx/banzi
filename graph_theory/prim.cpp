@@ -22,6 +22,8 @@ void prim()
     while (1)
     {
         int x = -1;
+        // 找到一个没有访问过的顶点,并且距离不是无穷大,就是
+        // prim中没加入已选的集合中可达的选择一个最小的可达的
         for (int i = 1; i <= n; i++)
         {
             if (!b[i] && dist[i] < 1 << 30) // long long 的时候修改
@@ -37,13 +39,16 @@ void prim()
             break;
         }
         b[x] = 1;
+        // 加上到这个最近点的距离
         ans += dist[x];
         tot++;
+        // 用新加入的点更新到其他点的距离
         for (auto i : edge[x])
         {
             dist[i.y] = min(dist[i.y], i.v);
         }
     }
+    // 联通与否
     if (tot == n)
     {
         printf("%d\n", ans);
