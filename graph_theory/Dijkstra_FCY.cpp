@@ -18,6 +18,7 @@ vector<pair<int, int>> edges[N];
 priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> st;
 void dijkstra(int start, int end)
 {
+    // 初始化距离
     for (int i = 1; i <= n; i++)
     {
         if (i == start)
@@ -47,6 +48,7 @@ void dijkstra(int start, int end)
         for (auto y : edges[now.second])
         {
             // 路径更短
+            // 从now走经过y走过来比之前记录的最短路径短
             if (dis[now.second] + y.first < dis[y.second])
             {
                 // 救援队数目加起来
@@ -69,7 +71,7 @@ void dijkstra(int start, int end)
                     cnt[y.second] = cnt[now.second] + a[y.second];
                     pre[y.second] = now.second;
                 }
-                st.push({dis[y.second], y.second});
+                st.push({dis[y.second], y.second}); //
             }
         }
     }
