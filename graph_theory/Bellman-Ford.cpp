@@ -33,8 +33,10 @@ void bellman()
         d[i] = LLONG_MAX / 2;
     }
     d[s] = 0;
+    // 可以通过ok控制迭代次数
     for (int k = 1; k <= n; k++)
     {
+        int ok = 1;
         for (int i = 1; i <= cnt; i++)
         {
             // u到v的一条边更新
@@ -44,7 +46,12 @@ void bellman()
             {
                 d[y] = d[x] + e[i].w;
                 pre[y] = x;
+                ok = 0;
             }
+        }
+        if (ok)
+        {
+            break;
         }
     }
     // 终点为n
