@@ -43,7 +43,7 @@ int Lucas(int n, int r, int m)
         return 1;
     }
     // 递归
-    return C(n % m, r % m, m) * Lucas(n / m, r / m, m) % m;
+    return (C(n % m, r % m, m) * Lucas(n / m, r / m, m)) % m;
 }
 signed main()
 {
