@@ -30,7 +30,7 @@ struct BIT
     {
         // x!=0
         assert(x != 0);
-        for (; x <= n; x += x & (-x))
+        for (; x <= size; x += x & (-x)) // 一定注意size
         {
             c[x] += s;
         }
