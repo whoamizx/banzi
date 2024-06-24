@@ -6,10 +6,13 @@ const int N = 1e5 + 10;
 // trajan找桥
 // https://codeforces.com/contest/1986/problem/F
 vector<int> edge[N];
+// dfs序
 int tin[N];
+// 能接触到的最小的dfs序
 int low[N];
 bool vis[N];
 int siz[N];
+// 现在的dfs序
 int timer = 1;
 int ans;
 int n;
@@ -30,7 +33,9 @@ void dfs(int now, int fa)
         {
             dfs(y, now);
             siz[now] += siz[y];
+            // 用小的更新dfs序
             low[now] = min(low[now], low[y]);
+            // 大于说明是桥
             if (low[y] > tin[now])
             {
                 ans = max(ans, siz[y] * (n - siz[y]));
@@ -38,6 +43,7 @@ void dfs(int now, int fa)
         }
         else
         {
+            // 用小的更新dfs序
             low[now] = min(low[now], low[y]);
         }
     }
