@@ -31,7 +31,6 @@ void dfs(int now, int fa)
             dfs(y, now);
             siz[now] += siz[y];
             low[now] = min(low[now], low[y]);
-            // 找桥
             if (low[y] > tin[now])
             {
                 ans = max(ans, siz[y] * (n - siz[y]));
@@ -39,7 +38,7 @@ void dfs(int now, int fa)
         }
         else
         {
-            low[fa] = min(low[now], low[fa]);
+            low[now] = min(low[now], low[y]);
         }
     }
 }
@@ -59,7 +58,6 @@ signed main()
             vis[i] = 0;
             siz[i] = 0;
         }
-        // 初始
         int sum = (n - 1) * n / 2;
         ans = 0;
         for (int i = 1; i <= m; i++)
