@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 const int N = 1e5 + 10; // 边数乘2
+// 边的终点和编号
 struct Node
 {
     int y, idx;
@@ -11,12 +12,13 @@ int n, m;
 int cnt = 1;
 // 记录走了几条边了
 int l;
+// 走过的度数
 int f[N];
 // 记录路径
 int c[N];
 // 度数
 int d[N];
-// 记录走过没有
+// 记录边走过没有
 bool b[N];
 inline void dfs(int x)
 {
