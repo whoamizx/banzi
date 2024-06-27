@@ -21,9 +21,12 @@ int euler_sieve(int n)
             {
                 break;
             }
-            // 每个prime的i倍都被筛,i递增的
             vis[i * prime[j]] = 1;
-            // 防止重复筛
+            // 如果i%prime[j]==0,说明i是合数,i=k*prime[j]
+            // 如果继续往后遍历,则会筛掉i*prime[j+1]
+            // 但是i*prime[j+1],应该被prime[j]筛掉
+            // 因为i*prime[j+1]=k*prime[j]*prime[j+1]
+            // 这里就会重复筛,所以break
             if (i % prime[j] == 0)
             {
                 break;

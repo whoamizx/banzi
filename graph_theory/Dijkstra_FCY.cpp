@@ -27,7 +27,7 @@ void dijkstra(int start, int end)
         }
         else
         {
-            dis[i] = LLONG_MAX;
+            dis[i] = LLONG_MAX / 2;
         }
     }
     // 起点塞进优队
