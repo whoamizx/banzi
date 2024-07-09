@@ -19,7 +19,7 @@ int main()
     for (int i = 1; i <= n; i++)
     {
         int rk = lower_bound(num.begin(), num.end(), a[i]) - num.begin();
-        printf("%d ", rk + 1);
+        printf("%d ", rk + 1);  
     }
     return 0;
 }

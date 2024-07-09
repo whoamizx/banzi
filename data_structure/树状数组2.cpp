@@ -14,6 +14,10 @@ struct BIT
     int size;
     void resize(int s)
     {
+        for(int i=1;i<=s;i++)
+        {
+            c[i]=0;
+        }
         size = s;
     }
     T query(int x)
