@@ -10,7 +10,7 @@ void mergesort(int l, int r)
         return;
     }
     int m = (l + r) / 2;
-    int p1 = l, p2 = m + 1, tot = 0;
+    // int p1 = l, p2 = m + 1,tot = 0;
     mergesort(l, m);
     mergesort(m + 1, r);
     inplace_merge(a + l, a + m, a + r);
