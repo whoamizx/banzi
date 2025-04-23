@@ -9,9 +9,9 @@ int low[N];
 int id=0;
 int ans=0;
 stack<int>stk;
-int cnt=0;
-int num[N];
-int vis[N];
+int cnt=0;//强连通分量数目
+int num[N];//每个强联通分量的大小
+int vis[N];//是否在栈里面
 void dfs(int now)
 {
     dfn[now]=low[now]=++id;
@@ -24,7 +24,7 @@ void dfs(int now)
             dfs(y);
             low[now]=min(low[now],low[y]);
         }
-        else if(vis[y])
+        else if(vis[y])//这里是vis不是dfn
         {
             low[now]=min(low[now],dfn[y]);
         }
